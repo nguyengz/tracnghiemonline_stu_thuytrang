@@ -1,0 +1,29 @@
+.bg-image {
+    background-image: url(../assets/images/photo22@2x.jpg);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 320px;
+}
+
+
+
+/* #page-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100%;
+    min-width: 320px;
+    min-height: 100vh;
+    flex: 1 0 auto;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    max-width: 100%;
+} */
