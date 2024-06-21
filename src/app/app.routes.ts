@@ -5,16 +5,6 @@ import { authGuard } from './auth/auth.guard';
 import { UserComponent } from './home/user/user.component';
 
 export const routes: Routes = [
-  // {
-  //   path: '',
-  //   redirectTo: 'home',
-  //   pathMatch: 'full',
-  // },
-  // {
-  //   path: 'home',
-  //   component: HomeComponent,
-  // },
-  // { path: 'login', component: LoginComponent },
   {
     path: '',
     redirectTo: 'admin',
@@ -24,10 +14,10 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  // {
-  //   path: 'users',
-  //   component: UserComponent,
-  // },
+  {
+    path: 'user',
+    component: UserComponent,
+  },
   {
     path: 'admin',
     component: HomeComponent,
@@ -35,37 +25,9 @@ export const routes: Routes = [
     children: [
       {
         path: 'users',
-        canActivateChild: [authGuard],
+        canActivate: [authGuard], // Add authGuard for user access (if needed)
         component: UserComponent,
       },
     ],
-    // children: [
-    //   {
-    //     path: '',
-    //     canActivateChild: [authGuard],
-    //     children: [
-    //       { path: 'users', component: UserComponent },
-    //       // { path: 'question-bank', component: QuestionBankComponent },
-    //       // {
-    //       //   path: 'question-bank/question/:questionId',
-    //       //   component: QuestionDetailComponent,
-    //       // },
-    //       // { path: 'courses', component: ManageCourseComponent },
-    //       // { path: 'tests', component: ManageTestComponent },
-    //       // { path: 'tests/:id/preview', component: DetailTestComponent },
-    //       // { path: 'tests/:id/users', component: UserTestComponent },
-    //       // {
-    //       //   path: 'tests/:id/users/:username',
-    //       //   component: UserTestResultComponent,
-    //       // },
-    //       // { path: 'tests/add-test', component: AddTestComponent },
-    //       // {
-    //       //   path: 'courses/:courseId/parts/:partId/view-question',
-    //       //   component: ListQuestionComponent,
-    //       // },
-    //       // { path: 'courses/:courseId/parts', component: ManagePartComponent },
-    //     ],
-    //   },
-    // ],
   },
 ];
