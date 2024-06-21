@@ -21,20 +21,9 @@ export class LoginComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
   });
-  onSubmit() {
-    if (this.loginForm.valid) {
-      // Xử lý logic đăng nhập ở đây
-      console.log(this.loginForm.value);
-      this.authService.login(this.loginForm.value).subscribe((data: any) => {
-        if (this.authService.isLoggedIn()) {
-          this.router.navigate(['/admin']);
-        }
-        console.log(data);
-      });
-    }
-  }
   // onSubmit() {
   //   if (this.loginForm.valid) {
+  //     // Xử lý logic đăng nhập ở đây
   //     console.log(this.loginForm.value);
   //     this.authService.login(this.loginForm.value).subscribe((data: any) => {
   //       if (this.authService.isLoggedIn()) {
@@ -44,4 +33,25 @@ export class LoginComponent {
   //     });
   //   }
   // }
+  onSubmit() {
+    if (this.loginForm.valid) {
+      // Xử lý logic đăng nhập ở đây
+      this.authService.login(this.loginForm.value).subscribe(
+        (data: any) => {
+          if (this.authService.isLoggedIn()) {
+            this.router.navigate(['/admin']);
+          }
+          console.log(data);
+        },
+        (error: any) => {
+          // Hiện thông báo lỗi
+          let errorMessage = 'Đã xảy ra lỗi. Vui lòng thử lại.';
+          if (error.error && error.error.message) {
+            errorMessage = error.error.message;
+          }
+          alert(errorMessage);
+        }
+      );
+    }
+  }
 }
