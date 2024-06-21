@@ -1,23 +1,66 @@
+<button class="btn btn-primary" (click)="toggleAddUserForm()">
+  Thêm người dùng
+</button>
+
+<app-add-user *ngIf="showAddUserForm"></app-add-user>
 <div class="table-responsive">
-  <table class="table table-primary">
-    <thead>
+  <table
+    class="table table-striped table-hover table-borderless table-primary align-middle"
+  >
+    <thead class="table-light">
+      <caption style="white-space: nowrap">
+        Sinh viên
+      </caption>
       <tr>
-        <th scope="col">Column 1</th>
-        <th scope="col">Column 2</th>
-        <th scope="col">Column 3</th>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Status</th>
+        <th>Role</th>
       </tr>
     </thead>
-    <tbody>
-      <tr class="">
-        <td scope="row">R1C1</td>
-        <td>R1C2</td>
-        <td>R1C3</td>
-      </tr>
-      <tr class="">
-        <td scope="row">Item</td>
-        <td>Item</td>
-        <td>Item</td>
+    <tbody class="table-group-divider">
+      <tr class="table-primary" *ngFor="let user of UserList">
+        <td>{{ user.id }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.gender }}</td>
+        <td>{{ user.address }}</td>
+        <td>{{ user.phone }}</td>
+        <td>{{ user.status }}</td>
+        <td>{{ user.role?.name || "-" }}</td>
       </tr>
     </tbody>
+    <tfoot></tfoot>
   </table>
 </div>
+
+<!-- <table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Email</th>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Status</th>
+      <th>Role</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of UserList">
+      <td>{{ user.id }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.name }}</td>
+      <td>{{ user.gender }}</td>
+      <td>{{ user.address }}</td>
+      <td>{{ user.phone }}</td>
+      <td>{{ user.status }}</td>
+      <td>{{ user.role?.name || "-" }}</td>
+    </tr>
+  </tbody>
+</table> -->

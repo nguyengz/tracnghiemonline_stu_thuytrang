@@ -19,6 +19,4 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     RouterLinkActive,
   ],
 })
-export class HomeComponent implements OnInit {
-  ngOnInit(): void {}
-}
+export class HomeComponent {}

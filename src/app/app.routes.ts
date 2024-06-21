@@ -14,10 +14,10 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-  {
-    path: 'user',
-    component: UserComponent,
-  },
+  // {
+  //   path: 'user',
+  //   component: UserComponent,
+  // },
   {
     path: 'admin',
     component: HomeComponent,

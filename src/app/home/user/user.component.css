@@ -1,0 +1,8 @@
+::ng-deep .modal.show {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+::ng-deep .modal-backdrop.show {
+    opacity: 1;
+}
