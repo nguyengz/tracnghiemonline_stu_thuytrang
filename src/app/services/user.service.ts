@@ -23,4 +23,10 @@ export class UserService {
       headers: headers,
     });
   }
+  deleteUser(userID: number): Observable<{}> {
+    const headers = { 'content-type': 'application/json' };
+    return this.http.delete(`${this.baseUrl}/users/${userID}`, {
+      headers: headers,
+    });
+  }
 }

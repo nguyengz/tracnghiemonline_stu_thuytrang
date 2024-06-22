@@ -1,7 +1,8 @@
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="email">Email:</label>
+<form class="row gx-3 p-1" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="col-md-6">
+    <label class="form-label" for="email">Email:</label>
     <input
+      class="form-control"
       type="email"
       id="email"
       formControlName="email"
@@ -9,9 +10,10 @@
       required
     />
   </div>
-  <div>
-    <label for="name">Name:</label>
+  <div class="col-md-6">
+    <label class="form-label" for="name">Name:</label>
     <input
+      class="form-control"
       type="text"
       id="name"
       formControlName="name"
@@ -19,9 +21,11 @@
       required
     />
   </div>
-  <div>
-    <label for="gender">Gender:</label>
+  <div class="col-md-6">
+    <label class="form-label" for="gender">Gender:</label>
+
     <select
+      class="form-select"
       id="gender"
       formControlName="gender"
       [(ngModel)]="useracount.gender"
@@ -32,18 +36,10 @@
       <option value="other">Other</option>
     </select>
   </div>
-  <div>
-    <label for="address">Address:</label>
-    <textarea
-      id="address"
-      formControlName="address"
-      [(ngModel)]="useracount.address"
-      required
-    ></textarea>
-  </div>
-  <div>
-    <label for="phone">Phone:</label>
+  <div class="col-md-6">
+    <label class="form-label" for="phone">Phone:</label>
     <input
+      class="form-control"
       type="text"
       id="phone"
       formControlName="phone"
@@ -51,10 +47,31 @@
       required
     />
   </div>
-  <div>
-    <label for="status">Status:</label>
+  <div class="col-12">
+    <label class="form-label" for="address">Address:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputAddress"
+      placeholder="1234 Main St "
+      id="address"
+      formControlName="address"
+      [(ngModel)]="useracount.address"
+      required
+    />
+    <!-- <textarea
+      id="address"
+      formControlName="address"
+      [(ngModel)]="useracount.address"
+      required
+    ></textarea> -->
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label" for="status">Status:</label>
     <select
-      id="status"
+      class="form-select"
+      id="inputState"
       formControlName="status"
       [(ngModel)]="useracount.status"
       required
@@ -63,9 +80,10 @@
       <option value="false">Inactive</option>
     </select>
   </div>
-  <div>
-    <label for="role">Role:</label>
+  <div class="col-md-4">
+    <label class="form-label" for="role">Role:</label>
     <select
+      class="form-select"
       id="role"
       formControlName="role"
       [(ngModel)]="useracount.roleId"
@@ -78,7 +96,9 @@
       <option value="2">2</option>
     </select>
   </div>
-  <button class="btn w-25 btn-lg btn-hero btn-primary">
-    <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Đăng nhập
-  </button>
+  <div class="col-12 my-xl-2">
+    <button class="btn w-auto btn-lg btn-hero btn-primary">
+      <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Thêm Sinh viên
+    </button>
+  </div>
 </form>

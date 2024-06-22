@@ -71,14 +71,22 @@
             class="rounded-circle"
           />
         </a>
-        <!-- <ul
-          id="submenuUser"
-          class="dropdown-menu text-small shadow mt-xxl-4"
-          aria-labelledby="dropdownUser2"
-        > -->
         <ul
           id="submenuUser"
-          class="dropdown-menu text-small shadow show"
+          class="dropdown-menu text-small shadow"
+          data-popper-placement="bottom-end"
+          style="
+            position: absolute;
+            inset: 2px auto auto 1px;
+            margin-right: 0px;
+            margin-left: auto;
+            transform: translate(-150px, 34px);
+          "
+          aria-labelledby="dropdownUser2"
+        >
+          <!-- <ul
+          id="submenuUser"
+          class="dropdown-menu text-small shadow"
           aria-labelledby="dropdownUser2"
           data-popper-placement="bottom-end"
           style="
@@ -87,7 +95,7 @@
             margin: 0px;
             transform: translate(-130px, 34px);
           "
-        >
+        > -->
           <li>
             <a class="dropdown-item" href="#">{{ username }}</a>
           </li>

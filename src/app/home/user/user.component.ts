@@ -20,8 +20,11 @@ import { AddUserComponent } from './add-user/add-user.component';
 export class UserComponent implements OnInit {
   UserList: User[] = [];
   showAddUserForm: boolean = false;
-
-  constructor(private userService: UserService) {}
+  isAddUserModalOpen = false;
+  selectedUsersForDeletion: User[] = [];
+  constructor(private userService: UserService) {
+    this.selectedUsersForDeletion = [];
+  }
   ngOnInit(): void {
     this.fetchUser();
   }
@@ -36,8 +39,67 @@ export class UserComponent implements OnInit {
       }
     );
   }
+  // deleteUsers() {
+  //   const selectedUserIds = this.UserList.filter((user) => user.isSelected).map(
+  //     (user) => user.id
+  //   );
+  //   this.userService.deleteUser(UserID).subscribe((res) => {
+  //     console.log(res);
+  //   });
+  // }
+  deleteUsers(): void {
+    if (this.selectedUsersForDeletion.length === 0) {
+      alert('Please select users to delete.');
+      return;
+    }
+
+    const confirmation = confirm(
+      'Are you sure you want to delete the selected users?'
+    );
+    if (!confirmation) {
+      return; // User canceled deletion
+    }
+
+    this.selectedUsersForDeletion.forEach((user) => {
+      this.userService
+        .deleteUser(user.id) // Call service to delete each user
+        .subscribe({
+          next: (response) => {
+            console.log('User deleted successfully:', response);
+            this.UserList = this.UserList.filter((u) => u.id !== user.id); // Update local list
+          },
+          error: (error) => {
+            console.error('Error deleting user:', error);
+            alert('An error occurred while deleting users. Please try again.');
+          },
+        });
+    });
+
+    this.selectedUsersForDeletion = []; // Clear selected users after deletion
+  }
+
+  isSelected(user: User): boolean {
+    return this.selectedUsersForDeletion.some(
+      (selectedUser) => selectedUser.id === user.id
+    );
+  }
+  toggleSelection(user: User): void {
+    const userIndex = this.selectedUsersForDeletion.findIndex(
+      (selectedUser) => selectedUser.id === user.id
+    );
+    if (userIndex > -1) {
+      this.selectedUsersForDeletion.splice(userIndex, 1);
+    } else {
+      this.selectedUsersForDeletion.push(user);
+    }
+  }
+
   onSubmit() {}
-  toggleAddUserForm() {
-    this.showAddUserForm = !this.showAddUserForm;
+  openAddUserModal(): void {
+    this.isAddUserModalOpen = true;
+  }
+
+  closeAddUserModal(): void {
+    this.isAddUserModalOpen = false;
   }
 }
