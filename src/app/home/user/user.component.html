@@ -1,4 +1,39 @@
 <div class="p-2">
+  <!-- <select name="" id="">
+    <option *ngFor="let faculty of FacultiesList" value="{{ faculty.id }}">
+      {{ faculty.facultyName }}
+    </option>
+  </select>
+  <select name="" id="">
+    <option *ngFor="let class of ClassList" value="{{ class.id }}">
+      {{ class.nameClass }}
+    </option>
+  </select> -->
+  <div class="row gx-3 m-2">
+    <select
+      class="form-select border-1 hover w-25"
+      name="faculty"
+      id="facultySelect"
+      (change)="onFacultySelected($event)"
+    >
+      <option value="">Chọn khoa</option>
+      <option *ngFor="let faculty of FacultiesList" value="{{ faculty.id }}">
+        {{ faculty.facultyName }}
+      </option>
+    </select>
+    <select
+      class="form-select border-1 hover w-25"
+      name="class"
+      id="classSelect"
+      (change)="getSinhVien($event)"
+    >
+      <option>Chọn lớp</option>
+      <option *ngFor="let class of filteredClassList" value="{{ class.id }}">
+        {{ class.nameClass }}
+      </option>
+    </select>
+  </div>
+
   <button class="btn btn-primary m-2" (click)="openAddUserModal()">
     Thêm người dùng
   </button>

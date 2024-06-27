@@ -9,6 +9,10 @@ import { UserService } from '../../services/user.service';
 import { User } from '../../models/users';
 import { CommonModule, NgForOf } from '@angular/common';
 import { AddUserComponent } from './add-user/add-user.component';
+import { FacultieService } from '../../services/facultie.service';
+import { Faculty } from '../../models/faculty';
+import { ClassService } from '../../services/class.service';
+import { Class } from '../../models/class';
 
 @Component({
   selector: 'app-user',
@@ -18,15 +22,48 @@ import { AddUserComponent } from './add-user/add-user.component';
   imports: [CommonModule, ReactiveFormsModule, AddUserComponent],
 })
 export class UserComponent implements OnInit {
+  [x: string]: any;
   UserList: User[] = [];
+  FacultiesList: Faculty[] = [];
+  ClassList: Class[] = [];
   showAddUserForm: boolean = false;
   isAddUserModalOpen = false;
   selectedUsersForDeletion: User[] = [];
-  constructor(private userService: UserService) {
+  filteredClassList: any[] = [];
+  selectedClassID: any;
+  constructor(
+    private userService: UserService,
+    private facultyService: FacultieService,
+    private classService: ClassService
+  ) {
     this.selectedUsersForDeletion = [];
   }
   ngOnInit(): void {
-    this.fetchUser();
+    // this.fetchUser();
+    this.fetchFaculty();
+    this.fetchClass();
+  }
+  fetchFaculty() {
+    this.facultyService.getFaculties().subscribe(
+      (data) => {
+        this.FacultiesList = data;
+        console.log(this.FacultiesList);
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
+  }
+  fetchClass() {
+    this.classService.getClass().subscribe(
+      (data) => {
+        this.ClassList = data;
+        console.log(this.ClassList);
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
   }
   fetchUser() {
     this.userService.getUsers().subscribe(
@@ -101,5 +138,22 @@ export class UserComponent implements OnInit {
 
   closeAddUserModal(): void {
     this.isAddUserModalOpen = false;
+  }
+  onFacultySelected(event: any) {
+    const selectedFacultyId = event.target.value;
+    this.filteredClassList = this.ClassList.filter(
+      (item) => item.faculty.id === parseInt(selectedFacultyId)
+    );
+  }
+  getSinhVien(event: Event) {
+    const selectedValue = (event.target as HTMLSelectElement).value;
+    this.selectedClassID = parseInt(selectedValue, 10);
+    // this.fetchUser();
+    console.log('Selected class ID:', this.selectedClassID);
+
+    // Tìm lớp được chọn trong danh sách filteredClassList
+    // this.selectedClass = this.filteredClassList.find(
+    //   (c) => c['id'] === classId
+    // );
   }
 }

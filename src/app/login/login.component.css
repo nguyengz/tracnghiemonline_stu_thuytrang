@@ -1,5 +1,5 @@
 .bg-image {
-    background-image: url(../assets/images/photo22@2x.jpg);
+    background-image: url("/assets/images/photo22@2x.jpg");
     width: 100%;
     min-height: 100vh;
     display: flex;
