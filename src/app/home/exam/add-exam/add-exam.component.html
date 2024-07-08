@@ -1,0 +1,102 @@
+<div class="container">
+    <h2>Tạo mới đề thi</h2>
+    <form  >
+      <div>
+        <label for="examName">Tên đề kiểm tra</label>
+        <input id="examName" formControlName="examName" type="text" placeholder="Nhập tên đề kiểm tra" />
+      </div>
+  
+      <div>
+        <label>Thời gian bắt đầu</label>
+        <div>
+          <input formControlName="startTime" type="datetime-local" />
+          <input formControlName="endTime" type="datetime-local" />
+        </div>
+        <div>
+          <label for="duration">Thời gian làm bài</label>
+          <input id="duration" formControlName="duration" type="number" placeholder="00" />
+        </div>
+      </div>
+  
+      <div>
+        <label for="assignTo">Giao cho</label>  
+        <select id="assignTo" formControlName="assignTo">
+            <option *ngFor="let class of classes" [value]="class.id">{{ class.name }}</option>
+            <option>D20_TH05</option>
+            <option>D20_QT05</option>
+            
+        </select>
+      </div>
+  
+      <div>
+        <div class="block block-rounded">
+          <div class="block-header block-header-default">
+            <div class="block-options">
+            </div>
+          </div>
+          <div class="block-content my-2">
+            <form>
+              <div class="row mb-3">
+              </div>
+            </form>
+            <div class="table-responsive">
+              <table class="table table-vcenter">
+                <thead>
+                  <tr>
+                    <th style="width: 50px">Chọn</th> <!-- Checkbox column -->
+                    <th class="text-center" style="width: 100px">ID</th>
+                    <th style="width: 700px">Nội dung câu hỏi</th>
+                    <th class="d-none d-sm-table-cell">Môn học</th>
+                    <th class="d-none d-sm-table-cell">Điểm</th>
+                  </tr>
+                </thead>
+                <tbody id="listQuestion">
+                  <tr *ngFor="let question of questions">
+                    <td><input type="checkbox" formControlName="selectedQuestions" [value]="question.id" /></td>
+                    <td class="text-center">{{ question.id }}</td>
+                    <td>{{ question.content }}</td>
+                    <td class="d-none d-sm-table-cell">{{ question.subjectId }}</td>
+                    <td class="d-none d-xl-table-cell">{{ question.point }}</td>
+                  </tr>
+                  <!-- Sample hardcoded row (remove this in your actual implementation) -->
+                  <tr>
+                    <td><input type="checkbox" formControlName="selectedQuestions" value="1" /></td>
+                    <td>1</td>
+                    <td>1+1=</td>
+                    <td>5001</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" formControlName="selectedQuestions" value="1" /></td>
+                    <td>2</td>
+                    <td>java</td>
+                    <td>5001</td>
+                    <td>5</td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" formControlName="selectedQuestions" value="1" /></td>
+                    <td>3</td>
+                    <td>ngôn ngữ lập trình nào sau đây là đúng ?</td>
+                    <td>5001</td>
+                    <td>10</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="config">
+        <label>
+          <input type="checkbox" formControlName="showScoreAfterExam" /> Xem điểm sau khi thi xong
+        </label>
+        <label>
+          <input type="checkbox" formControlName="showExamAfterExam" /> Xem bài làm khi thi xong
+        </label>
+      </div>
+  
+      <button type="submit">+ TẠO ĐỀ</button>
+    </form>
+  </div>
+  

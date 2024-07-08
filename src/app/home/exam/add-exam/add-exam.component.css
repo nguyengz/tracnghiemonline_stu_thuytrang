@@ -1,0 +1,87 @@
+/* General Reset and Font Size Adjustment */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    font-size: 14px; /* Adjust overall text size */
+  }
+  
+  /* Main Wrapper */
+  .wrapper {
+    display: flex;
+    height: 100vh;
+  }
+  
+  /* Main Content Area */
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    display: grid; /* Use CSS Grid */
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    grid-template-rows: repeat(2, auto); /* Two rows */
+    gap: 20px; /* Gap between grid items */
+  }
+  
+  /* Container Styles */
+  .container {
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  /* Form and Answer Groups */
+  .form-group,
+  .answer-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Labels */
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  /* Input and Textarea Styles */
+  input,
+  textarea,
+  select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  /* Button Styles */
+  button {
+    padding: 10px 20px;
+    background-color:#086df2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  button:hover {
+    background-color: #086df2;
+  }
+  
+  /* Additional Styling */
+  .answer-group {
+    margin-top: 10px;
+  }
+  
+  .options {
+    margin-top: 5px;
+  }
+  
+  .row {
+    display: block;
+  }
+  
+  

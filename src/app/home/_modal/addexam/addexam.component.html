@@ -1,0 +1,74 @@
+<form class="row gx-3 p-1" (ngSubmit)="onSubmit()">
+  <div class="col-md-6">
+    <label class="form-label" for="email">Tên đề thi:</label>
+    <input
+      class="form-control"
+      type="name"
+      id="name"
+      [(ngModel)]="exam.name"
+      name="name"
+      required
+    />
+  </div>
+  <div class="col-md-6">
+    <label class="form-label" for="name">Thời gian:</label>
+    <input
+      class="form-control"
+      type="number"
+      id="duration"
+      [(ngModel)]="exam.duration"
+      name="duration"
+      required
+    />
+  </div>
+  <div class="col-md-6">
+    <label class="form-label" for="gender">Điểm:</label>
+    <input
+      class="form-control"
+      type="number"
+      id="totalPoints"
+      name="totalPoints"
+      [(ngModel)]="exam.totalPoints"
+      required
+    />
+  </div>
+  <div class="col-md-6">
+    <label class="form-label" for="phone">Ghi chú:</label>
+    <input
+      class="form-control"
+      type="text"
+      id="title"
+      name="title"
+      [(ngModel)]="exam.title"
+      required
+    />
+  </div>
+
+  <!-- <div class="col-md-4">
+    <label class="form-label" for="status">Status:</label>
+    <select
+      class="form-select"
+      id="inputState"
+      formControlName="status"
+      required
+    >
+      <option value="true">Active</option>
+      <option value="false">Inactive</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label" for="role">Role:</label>
+    <select class="form-select" id="role" formControlName="role" required>
+       <option *ngFor="let role of roleList" [value]="role.id">
+        {{ role.name }}
+      </option> -->
+  <!-- <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+  </div> -->
+  <div class="col-12 my-xl-3">
+    <button class="btn w-auto btn-lg btn-hero btn-primary">
+      <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Thêm Sinh viên
+    </button>
+  </div>
+</form>

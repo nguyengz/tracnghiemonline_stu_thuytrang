@@ -1,0 +1,115 @@
+<div class="row r-2" *ngIf="showListExam">
+  <div
+    class="col-xxl-9 mx-xxl-auto justify-content-center align-items-center g-2"
+  >
+    <p class="caption-top">Môn {{ subjectName }}</p>
+    <div>
+      <button class="btn btn-primary m-2" (click)="openAddExamModal()">
+        Thêm đề
+      </button>
+    </div>
+  </div>
+  <!-- Modal add exam -->
+
+  <div
+    class="col-xxl-9 mx-xxl-auto justify-content-center align-items-center g-2"
+    *ngFor="let exam of examBySubjects"
+  >
+    <div class="col">
+      <div class="card">
+        <div class="card-body row justify-content-between align-items-center">
+          <div>
+            <h4 class="card-title">Tên: {{ exam.name }}</h4>
+            <!-- <h6 class="card-subtitle text-muted">Subtitle</h6> -->
+          </div>
+        </div>
+        <div class="card-body row justify-content-between">
+          <div class="row justify-content-center align-items-center g-2">
+            <div class="col">
+              <p class="card-text">Điểm: {{ exam.totalPoints }}</p>
+              <p class="card-text">Thời gian: {{ exam.duration }}</p>
+            </div>
+            <div class="col text-lg-end pe-lg-5 px-lg-2">
+              <button
+                type="button"
+                class="btn btn-light me-5"
+                data-bs-toggle="button"
+                aria-pressed="false"
+                autocomplete="off"
+                style="width: fit-content"
+              >
+                Trạng thái
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="button"
+                aria-pressed="false"
+                autocomplete="off"
+                style="width: fit-content"
+                (click)="openExamDetail(exam.id, exam.name)"
+              >
+                Xem chi tiết
+              </button>
+            </div>
+
+            <!-- <div class="row"></div> -->
+          </div>
+          <!-- <a href="#" class="card-link">Link 1</a>
+  <a href="#" class="card-link">Link 2</a> -->
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="table-responsive">
+    <table class="table table-primary">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Tên</th>
+          <th scope="col">Điểm</th>
+          <th scope="col">Thời gian</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="" *ngFor="let exam of examBySubjects">
+          <td scope="row">{{ exam.id }}</td>
+          <td>{{ exam.name }}</td>
+          <td>{{ exam.totalPoints }}</td>
+          <td>{{ exam.duration }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+  </div>
+</div>
+
+<app-exam-detail
+  *ngIf="showExamDetail"
+  [examID]="selectedExamID"
+  [examName]="selectedexamName"
+></app-exam-detail>
+<div class="modal" tabindex="-1" [ngClass]="{ show: isAddExamModalOpen }">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm sinh viên</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeAddExamModal()"
+        ></button>
+      </div>
+      <div class="modal-body"><app-addexam></app-addexam></div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeAddExamModal()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,98 @@
+#card_subject:hover {
+  transform: translateY(-10px);
+}
+
+.subjects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* Khoảng cách giữa các nút */
+  justify-content: center;
+  /* Căn giữa theo chiều ngang */
+  padding: 20px;
+  /* Thêm khoảng cách xung quanh */
+}
+
+.subject-box {
+  display: flex;
+  justify-content: center;
+  /* Căn giữa nội dung theo chiều ngang */
+  align-items: center;
+  /* Căn giữa nội dung theo chiều dọc */
+  width: 130px;
+  /* Chiều rộng của box */
+  height: 130px;
+  /* Chiều cao của box */
+  background-color: #b2d4df;
+  /* Màu nền của box */
+  border: 2px solid #b2d4df;
+  /* Viền của box */
+  border-radius: 10px;
+  /* Bo góc của box */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Đổ bóng */
+  transition: transform 0.2s, box-shadow 0.2s;
+  /* Hiệu ứng khi hover */
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  /* Căn giữa nội dung văn bản */
+}
+
+.subject-box:hover {
+  transform: translateY(-10px);
+  /* Hiệu ứng di chuyển khi hover */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  /* Hiệu ứng đổ bóng khi hover */
+}
+
+button.mat-button {
+  width: 100%;
+  /* Chiều rộng của nút bên trong box */
+  height: 100%;
+  /* Chiều cao của nút bên trong box */
+  background-color: transparent;
+  /* Màu nền của nút */
+  color: rgb(10, 0, 0);
+  /* Màu chữ của nút */
+  border: none;
+  /* Bỏ viền của nút */
+  font-size: 60px;
+  /* Kích thước chữ lớn hơn */
+  cursor: pointer;
+  /* Con trỏ khi hover vào nút */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  /* Thêm khoảng cách bên trong nút */
+  transition: background-color 0.2s;
+  /* Hiệu ứng chuyển màu khi hover */
+}
+
+button.mat-button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  /* Màu nền của nút khi hover */
+}
+
+button.mat-button:focus {
+  outline: none;
+  /* Bỏ viền khi focus */
+}
+
+button.mat-button:active {
+  background-color: rgba(0, 0, 0, 0.2);
+  /* Màu nền của nút khi active */
+  transform: translateY(2px);
+  /* Hiệu ứng khi nhấn nút */
+}
+
+::ng-deep .modal.show {
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+::ng-deep .modal-backdrop.show {
+  opacity: 1;
+}

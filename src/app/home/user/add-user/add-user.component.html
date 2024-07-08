@@ -1,0 +1,104 @@
+<form class="row gx-3 p-1" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <div class="col-md-6">
+    <label class="form-label" for="email">Email:</label>
+    <input
+      class="form-control"
+      type="email"
+      id="email"
+      formControlName="email"
+      [(ngModel)]="useracount.email"
+      required
+    />
+  </div>
+  <div class="col-md-6">
+    <label class="form-label" for="name">Name:</label>
+    <input
+      class="form-control"
+      type="text"
+      id="name"
+      formControlName="name"
+      [(ngModel)]="useracount.name"
+      required
+    />
+  </div>
+  <div class="col-md-6">
+    <label class="form-label" for="gender">Gender:</label>
+
+    <select
+      class="form-select"
+      id="gender"
+      formControlName="gender"
+      [(ngModel)]="useracount.gender"
+      required
+    >
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label class="form-label" for="phone">Phone:</label>
+    <input
+      class="form-control"
+      type="text"
+      id="phone"
+      formControlName="phone"
+      [(ngModel)]="useracount.phone"
+      required
+    />
+  </div>
+  <div class="col-12">
+    <label class="form-label" for="address">Address:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="inputAddress"
+      placeholder="1234 Main St "
+      id="address"
+      formControlName="address"
+      [(ngModel)]="useracount.address"
+      required
+    />
+    <!-- <textarea
+      id="address"
+      formControlName="address"
+      [(ngModel)]="useracount.address"
+      required
+    ></textarea> -->
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label" for="status">Status:</label>
+    <select
+      class="form-select"
+      id="inputState"
+      formControlName="status"
+      [(ngModel)]="useracount.status"
+      required
+    >
+      <option value="true">Active</option>
+      <option value="false">Inactive</option>
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label class="form-label" for="role">Role:</label>
+    <select
+      class="form-select"
+      id="role"
+      formControlName="role"
+      [(ngModel)]="useracount.roleId"
+      required
+    >
+      <!-- <option *ngFor="let role of roleList" [value]="role.id">
+        {{ role.name }}
+      </option> -->
+      <option value="1">1</option>
+      <option value="2">2</option>
+    </select>
+  </div>
+  <div class="col-12 my-xl-2">
+    <button class="btn w-auto btn-lg btn-hero btn-primary">
+      <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Thêm Sinh viên
+    </button>
+  </div>
+</form>

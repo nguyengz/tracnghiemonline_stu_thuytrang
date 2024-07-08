@@ -1,0 +1,87 @@
+<div>
+  <h1>Danh sách môn học</h1>
+  <button class="btn btn-primary m-2" (click)="openAddExamModal()">
+    Thêm môn học
+  </button>
+  <div
+    class="row w-75 m-auto text-center justify-content-xl-center align-content-xl-center"
+  >
+    <div id="card_subject" class="col-4 p-1" *ngFor="let subject of subjects">
+      <div
+        class="card"
+        style="height: 100px"
+        (click)="openQuestions(subject.id, subject.subjectName)"
+      >
+        <div class="card-body">
+          <h3 class="card-title">{{ subject.subjectName }}</h3>
+          <!-- <p class="card-text">Text</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="subjects-grid">
+    <div *ngFor="let subject of subjects" class="subject-box">
+      <button
+        mat-button
+        (click)="openQuestions(subject.id, subject.subjectName)"
+      >
+        {{ subject.subjectName }}
+      </button>
+    </div>
+  </div> -->
+</div>
+<div class="modal" tabindex="-1" [ngClass]="{ show: isAddSubjectModalOpen }">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Thêm sinh viên</h5>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="closeAddExamModal()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form class="row gx-3 p-1" (ngSubmit)="onAddSubject()">
+          <!-- <div class="col-md-6">
+            <label class="form-label" for="email">Tên đề thi:</label>
+            <input
+              class="form-control"
+              type="name"
+              id="name"
+              [(ngModel)]="subject.id"
+              name="name"
+              required
+            />
+          </div> -->
+          <div class="col-md-12">
+            <label class="form-label" for="name">Môn học</label>
+            <input
+              class="form-control"
+              type="text"
+              id="duration"
+              [(ngModel)]="subject.subjectName"
+              name="duration"
+              required
+            />
+          </div>
+
+          <div class="col-12 my-xl-3">
+            <button class="btn w-auto btn-lg btn-hero btn-primary">
+              <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Save
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeAddExamModal()"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

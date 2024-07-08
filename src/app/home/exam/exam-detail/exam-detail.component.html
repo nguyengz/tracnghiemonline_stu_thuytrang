@@ -1,0 +1,264 @@
+<div class="container">
+  <div class="row">
+    <caption>
+      {{
+        subjectName
+      }}
+      >>Đề:
+      {{
+        examName
+      }}
+    </caption>
+  </div>
+  <div class="col">
+    <div class="col-4">
+      <p>
+        <button
+          class="btn btn-primary"
+          type="button"
+          aria-expanded="false"
+          aria-controls="contentId"
+          data-bs-toggle="modal"
+          data-bs-target="#modal-add-question"
+          id="addquestionnew"
+        >
+          Thêm câu hỏi
+        </button>
+      </p>
+      <div class="collapse" id="contentId"></div>
+    </div>
+    <div
+      class="col-xxl-9 mx-xxl-auto justify-content-center align-items-center g-2"
+      *ngFor="let question of questionOfExam"
+    >
+      <div class="col">
+        <div class="card">
+          <div class="card-body row justify-content-between align-items-center">
+            <h3 class="card-title">Câu hỏi: {{ question.content }}</h3>
+            <div class="column-gap-sm-4">
+              <p class="card-text">Đáp án</p>
+              <div class="row m-auto text-xxl-center">
+                <div
+                  class="col"
+                  *ngFor="let option of question.options; let i = index"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-secondary w-50"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Tooltip Content"
+                  >
+                    {{ option.content }}
+                  </button>
+                  <div *ngIf="i % 2 === 1"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="modal-add-question"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="modal-add-question"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
+    <div class="modal-content">
+      <ul class="nav nav-tabs nav-tabs-alt mb-1" role="tablist">
+        <li class="nav-item">
+          <button
+            class="nav-link active"
+            id="btabs-alt-static-home-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#btabs-alt-static-home"
+            role="tab"
+            aria-controls="btabs-alt-static-home"
+            aria-selected="true"
+          >
+            Thêm thủ công
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            id="btabs-alt-static-profile-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#btabs-alt-static-profile"
+            role="tab"
+            aria-controls="btabs-alt-static-profile"
+            aria-selected="false"
+          >
+            Thêm từ file
+          </button>
+        </li>
+        <li class="nav-item ms-auto">
+          <button
+            type="button"
+            class="btn btn-close p-3"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </li>
+      </ul>
+      <div
+        class="modal-body block block-transparent bg-white mb-0 block-rounded"
+      >
+        <div class="block-content tab-content">
+          <div
+            class="tab-pane active"
+            id="btabs-alt-static-home"
+            role="tabpanel"
+            aria-labelledby="btabs-static-home-tab"
+            tabindex="0"
+          >
+            <form (ngSubmit)="saveQuestion()">
+              <div class="mb-4 row">
+                <div class="col-4">
+                  <label for="subject" class="form-label">Môn học</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="subjectID"
+                    name="subjectID"
+                    [(ngModel)]="subjectName"
+                    [value]="subjectName"
+                    disabled
+                  />
+                  <!-- <select
+                    class="form-select border-1 hover w-auto"
+                    name="subjectId"
+                    id="subjectId"
+                    [(ngModel)]="question.subjectId"
+                  >
+                    <option value="">Môn Học</option>
+                    <option value="{{ subjectID }}"></option>
+                  </select> -->
+                </div>
+                <div class="col-4">
+                  <label for="point" class="form-label">Điểm:</label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    id="point"
+                    [(ngModel)]="question.point"
+                    name="point"
+                  />
+                </div>
+              </div>
+              <div class="mb-4 row">
+                <h6>Câu hỏi</h6>
+                <div class="form-group">
+                  <label for="question-content">Nội dung câu hỏi</label>
+                  <textarea
+                    class="form-control"
+                    rows="3"
+                    id="content"
+                    [(ngModel)]="question.content"
+                    name="content"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="mb-4 row">
+                <h6>Danh sách đáp án</h6>
+                <p>
+                  <button
+                    class="btn btn-hero btn-outline-primary"
+                    type="button"
+                    (click)="addOption()"
+                  >
+                    Thêm câu trả lời
+                  </button>
+                </p>
+                <div class="row">
+                  <div
+                    class="col-md-6"
+                    *ngFor="let option of question.options; let i = index"
+                    [ngClass]="{ 'mb-4': i % 2 === 0 }"
+                  >
+                    <div class="card card-body">
+                      <div class="form-group">
+                        <label class="form-label" for="option-content-{{ i }}"
+                          >Đáp án {{ i + 1 }}:</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="option-content-{{ i }}"
+                          [(ngModel)]="option.content"
+                          name="option-content-{{ i }}"
+                        ></textarea>
+                      </div>
+                      <div class="form-check mt-4">
+                        <input
+                          class="form-check-input"
+                          type="radio"
+                          id="true-option-{{ i }}"
+                          [checked]="option.status"
+                          (click)="changeStatus(i, option.status)"
+                          [name]="'option-status-' + i"
+                        />
+                        <label
+                          class="form-check-label"
+                          for="true-option-{{ i }}"
+                        >
+                          Đáp án đúng
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-fw fa-plus me-1"></i> Lưu câu hỏi
+                </button>
+              </div>
+            </form>
+          </div>
+          <div
+            class="tab-pane"
+            id="btabs-alt-static-profile"
+            role="tabpanel"
+            aria-labelledby="btabs-static-profile-tab"
+            tabindex="0"
+          >
+            <form id="form-upload">
+              <div class="mb-4">
+                <div class="row">
+                  <div class="col-6">
+                    <label for="" class="form-label">Môn học</label>
+                    <select
+                      id="monhocfile"
+                      class="js-select2 form-select data-monhoc"
+                      name="monhocfile"
+                      style="width: 100%"
+                      required
+                    >
+                      <!-- Add options dynamically -->
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="mb-4 d-flex justify-content-between">
+                <button type="button" class="btn btn-hero btn-primary">
+                  <i class="fa fa-cloud-arrow-up"></i>Thêm file Excel
+                </button>
+                <button type="submit" class="btn btn-hero btn-primary">
+                  <i class="fa fa-cloud-arrow-up"></i> Thêm vào hệ thống
+                </button>
+              </div>
+            </form>
+            <div id="content-file"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
