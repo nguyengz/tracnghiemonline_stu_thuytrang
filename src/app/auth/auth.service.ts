@@ -25,6 +25,6 @@ export class AuthService {
   }
   getUserRole(): string | '' {
     const user = JSON.parse(localStorage.getItem('authUser') || 'null');
-    return user?.role || '';
+    return user?.roleName || '';
   }
 }

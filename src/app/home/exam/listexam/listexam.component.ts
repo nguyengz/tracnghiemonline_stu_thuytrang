@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ExamDetailComponent } from '../exam-detail/exam-detail.component';
 import { AddexamComponent } from '../../_modal/addexam/addexam.component';
 import { Subject } from '../../../models/subject';
+import { PreviewExamComponent } from '../preview-exam/preview-exam.component';
 
 @Component({
   selector: 'app-listexam',
@@ -19,6 +20,7 @@ import { Subject } from '../../../models/subject';
     ExamDetailComponent,
 
     AddexamComponent,
+    PreviewExamComponent,
   ],
 })
 export class ListexamComponent implements OnInit {
@@ -28,6 +30,7 @@ export class ListexamComponent implements OnInit {
   selectedExamID!: number;
   selectedexamName!: string;
   showExamDetail = false;
+  showExamPre = false;
   showListExam = true;
   isAddExamModalOpen = false;
 
@@ -58,6 +61,16 @@ export class ListexamComponent implements OnInit {
         console.error('Error fetching subjects:', error);
       }
     );
+  }
+  openExamPreview(examID: number, examName: string) {
+    // this.router.navigate(['admin', 'exam', 'detail'], {
+    //   queryParams: { subjectID: subjectID, examID: examID, examName: examName },
+    // });
+    // console.log(examID, examName);
+    this.showExamPre = true;
+    this.showListExam = false;
+    this.selectedExamID = examID;
+    this.selectedexamName = examName;
   }
   openExamDetail(examID: number, examName: string) {
     // this.router.navigate(['admin', 'exam', 'detail'], {

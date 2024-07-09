@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Subject } from '../../../models/subject';
 import { QuestionOfExam } from '../../../models/question-of-exam';
 import { Option } from '../../../models/option';
+import { Examquestion } from '../../../models/examquestion';
 
 @Component({
   selector: 'app-exam-detail',
@@ -25,9 +26,12 @@ export class ExamDetailComponent implements OnInit {
   // examDetail: ExamDetail[] = [];
   subjectID!: number;
   subjectName!: string;
+  isQuestionPre = false;
   // examID!: number;
   // examName!: string;
   question = new Question();
+  questionPre = new Question();
+  examQuestion = new Examquestion();
   questionOfExam: QuestionOfExam[] = [];
   // questions: Option[] = [];
   subjects: Subject[] = [];
@@ -77,8 +81,11 @@ export class ExamDetailComponent implements OnInit {
     // console.log(this.question);
     this.questionService.createQuestion(this.question).subscribe(
       (response) => {
-        console.log('Question created:', response);
+        this.questionPre = response;
+        console.log('Question created:', this.questionPre);
+
         alert('Thêm thành công');
+        this.isQuestionPre = true;
         // this.getQuestions();
         this.resetQuestionForm();
       },
@@ -87,7 +94,23 @@ export class ExamDetailComponent implements OnInit {
       }
     );
   }
-
+  addQuestionInExam(examID: number, questionID: number) {
+    if (this.questionPre.id != null) {
+      this.examQuestion.examId = examID;
+      this.examQuestion.questionId = questionID;
+      console.log(this.examQuestion);
+      this.examService.addQuestionInExam(this.examQuestion).subscribe(
+        (reponse) => {
+          alert('Thêm thành công');
+          this.getExamDetail(this.examID);
+        },
+        (error) => {
+          alert('Thêm thất bại');
+          console.error('Error creating question:', error);
+        }
+      );
+    }
+  }
   addOption() {
     if (this.question.options.length < 4) {
       this.question.options.push({

@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { ExamDetail } from '../models/exam-detail';
 import { Exam } from '../models/exam';
+import { Examquestion } from '../models/examquestion';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +36,15 @@ export class ExamService {
     return this.http.post<Exam>(`${this.baseUrl}/exams`, body, {
       headers: this.headers,
     });
+  }
+  addQuestionInExam(examquestions: Examquestion): Observable<Examquestion> {
+    const body = JSON.stringify(examquestions);
+    return this.http.post<Examquestion>(
+      `${this.baseUrl}/exam-questions`,
+      body,
+      {
+        headers: this.headers,
+      }
+    );
   }
 }

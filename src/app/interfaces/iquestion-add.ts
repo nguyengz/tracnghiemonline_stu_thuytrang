@@ -1,4 +1,5 @@
 export interface IQuestionAdd {
+  id: number;
   content: string;
   point: number;
   subjectId: number;

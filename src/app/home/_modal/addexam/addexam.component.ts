@@ -37,7 +37,8 @@ export class AddexamComponent implements OnInit {
       this.examService.addExam(this.exam).subscribe(
         (response) => {
           alert('Thêm thành công');
-          console.log('Exam added successfully:', response);
+          this.exam = response;
+          console.log('Exam added successfully:', this.exam);
           // Reset the form after successful submission
           //  this.userForm.reset();
         },

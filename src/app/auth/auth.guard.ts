@@ -10,26 +10,27 @@ export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
   if (authService.isLoggedIn()) {
-    const userRole = authService.getUserRole();
+    // const userRole = authService.getUserRole();
+    // console.log(userRole);
+    // // Định nghĩa các vai trò được phép truy cập cho mỗi trang
+    // const allowedRoles: AllowedRoles = {
+    //   '/admin': ['ADMIN', 'LECTURERS'],
+    //   '/admin/users': ['ADMIN'],
+    //   '/admin/question': ['ADMIN', 'LECTURERS'],
+    //   '/admin/exam': ['ADMIN', 'LECTURERS'],
+    //   '/admin/exam/add': ['ADMIN', 'LECTURERS'],
+    //   '/admin/exam/list': ['ADMIN', 'LECTURERS'],
+    //   // Thêm các trang và vai trò được phép truy cập tương ứng
+    // };
 
-    // Định nghĩa các vai trò được phép truy cập cho mỗi trang
-    const allowedRoles: AllowedRoles = {
-      '/admin/users': ['admin', 'manager'],
-      '/admin/question': ['admin', 'teacher'],
-      '/admin/exam': ['admin', 'teacher'],
-      '/admin/exam/add': ['admin', 'teacher'],
-      '/admin/exam/list': ['admin', 'teacher'],
-      // Thêm các trang và vai trò được phép truy cập tương ứng
-    };
-
-    // Kiểm tra xem vai trò của người dùng có được phép truy cập vào trang hiện tại không
-    if (allowedRoles[state.url]?.includes(userRole)) {
-      return true; // Cho phép người dùng truy cập
-    }
+    // // Kiểm tra xem vai trò của người dùng có được phép truy cập vào trang hiện tại không
+    // if (allowedRoles[state.url]?.includes(userRole)) {
+    //   console.log('aaa' + allowedRoles);
+    //   return true; // Cho phép người dùng truy cập
     // } else {
-    //   this.router.navigate(['/login']); // Chuyển hướng người dùng đến trang đăng nhập
-    //   return false; // Không cho phép người dùng truy cập
+    //   return false;
     // }
+    return true;
   }
   router.navigate(['/login']);
   return false;

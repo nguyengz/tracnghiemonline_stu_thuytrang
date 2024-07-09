@@ -29,12 +29,19 @@
     </div>
     <div
       class="col-xxl-9 mx-xxl-auto justify-content-center align-items-center g-2"
-      *ngFor="let question of questionOfExam"
+      *ngFor="let question of questionOfExam; let i = index"
     >
       <div class="col">
         <div class="card">
           <div class="card-body row justify-content-between align-items-center">
-            <h3 class="card-title">Câu hỏi: {{ question.content }}</h3>
+            <h3 class="card-title">
+              Câu hỏi {{ i + 1 }}:
+              <caption>
+                {{
+                  question.content
+                }}
+              </caption>
+            </h3>
             <div class="column-gap-sm-4">
               <p class="card-text">Đáp án</p>
               <div class="row m-auto text-xxl-center">
@@ -221,6 +228,47 @@
                 </button>
               </div>
             </form>
+          </div>
+          <div class="card" *ngIf="isQuestionPre">
+            <div
+              class="card-body row justify-content-between align-items-center"
+            >
+              <h3 class="card-title">
+                Câu hỏi :
+                <caption>
+                  {{
+                    questionPre.content
+                  }}
+                </caption>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  (click)="addQuestionInExam(examID, questionPre.id)"
+                >
+                  <i class="fa fa-fw fa-plus me-1"></i> Lưu câu hỏi
+                </button>
+              </h3>
+              <div class="column-gap-sm-4">
+                <p class="card-text">Đáp án</p>
+                <div class="row m-auto text-xxl-center">
+                  <div
+                    class="col"
+                    *ngFor="let option of questionPre.options; let i = index"
+                  >
+                    <button
+                      type="button"
+                      class="btn btn-secondary w-50"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Tooltip Content"
+                    >
+                      {{ option.content }}
+                    </button>
+                    <div *ngIf="i % 2 === 1"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <div
             class="tab-pane"

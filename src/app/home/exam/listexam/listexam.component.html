@@ -42,7 +42,7 @@
               </button>
               <button
                 type="button"
-                class="btn btn-primary"
+                class="btn btn-primary me-5"
                 data-bs-toggle="button"
                 aria-pressed="false"
                 autocomplete="off"
@@ -50,6 +50,17 @@
                 (click)="openExamDetail(exam.id, exam.name)"
               >
                 Xem chi tiết
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="button"
+                aria-pressed="false"
+                autocomplete="off"
+                style="width: fit-content"
+                (click)="openExamPreview(exam.id, exam.name)"
+              >
+                Preview
               </button>
             </div>
 
@@ -89,6 +100,11 @@
   [examID]="selectedExamID"
   [examName]="selectedexamName"
 ></app-exam-detail>
+<app-preview-exam
+  *ngIf="showExamPre"
+  [examID]="selectedExamID"
+  [examName]="selectedexamName"
+></app-preview-exam>
 <div class="modal" tabindex="-1" [ngClass]="{ show: isAddExamModalOpen }">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">

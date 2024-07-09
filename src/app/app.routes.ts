@@ -50,7 +50,7 @@ export const routes: Routes = [
       },
       {
         path: 'exam/list',
-        canActivate: [authGuard], // Add authGuard for user access (if needed)
+        // canActivate: [authGuard], // Add authGuard for user access (if needed)
         component: ListexamComponent,
       },
       // {

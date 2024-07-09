@@ -20,7 +20,7 @@
             <span class="ms-1 d-none d-sm-inline ripple">Dashboard</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="isAdmin">
           <a
             href="#submenu1"
             data-bs-toggle="collapse"
