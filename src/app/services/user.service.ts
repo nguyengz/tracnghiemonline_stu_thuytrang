@@ -18,6 +18,11 @@ export class UserService {
       .get<any>(`${this.baseUrl}/users`)
       .pipe(map((response) => response.map((item: any) => new User(item))));
   }
+  getUsersRole(roleID: number): Observable<User[]> {
+    return this.http
+      .get<any>(`${this.baseUrl}/users/by-role-id?roleId=${roleID}`)
+      .pipe(map((response) => response.map((item: any) => new User(item))));
+  }
   addUser(user: UserAcount): Observable<User> {
     const headers = { 'content-type': 'application/json' };
     const body = JSON.stringify(user);

@@ -13,6 +13,7 @@ import { FacultieService } from '../../services/facultie.service';
 import { Faculty } from '../../models/faculty';
 import { ClassService } from '../../services/class.service';
 import { Class } from '../../models/class';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -23,7 +24,8 @@ import { Class } from '../../models/class';
 })
 export class UserComponent implements OnInit {
   [x: string]: any;
-  UserList: User[] = [];
+  UserListSV: User[] = [];
+  UserListGV: User[] = [];
   FacultiesList: Faculty[] = [];
   ClassList: Class[] = [];
   showAddUserForm: boolean = false;
@@ -31,17 +33,28 @@ export class UserComponent implements OnInit {
   selectedUsersForDeletion: User[] = [];
   filteredClassList: any[] = [];
   selectedClassID: any;
+  roleName!: string;
+  isList: boolean = false;
+
   constructor(
     private userService: UserService,
     private facultyService: FacultieService,
-    private classService: ClassService
+    private classService: ClassService,
+    private route: ActivatedRoute
   ) {
     this.selectedUsersForDeletion = [];
   }
   ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      this.isList = params['list'] === 'sinhvien';
+      const RID = JSON.parse(localStorage.getItem('RID') || 'null');
+
+      this.fetchUserByRole(RID.role);
+    });
     // this.fetchUser();
     this.fetchFaculty();
     this.fetchClass();
+    // this.fetchUserByRole(RID.role);
   }
   fetchFaculty() {
     this.facultyService.getFaculties().subscribe(
@@ -65,22 +78,57 @@ export class UserComponent implements OnInit {
       }
     );
   }
-  fetchUser() {
-    this.userService.getUsers().subscribe(
-      (data) => {
-        this.UserList = data;
-        console.log(this.UserList);
-      },
-      (error) => {
-        console.error('Error fetching users:', error);
-      }
-    );
+  // fetchUser() {
+  //   this.userService.getUsers().subscribe(
+  //     (data) => {
+  //       this.UserList = data;
+  //       console.log(this.UserList);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching users:', error);
+  //     }
+  //   );
+  // }
+  // fetchUserByRole(roleID: number) {
+  //   // console;
+  //   this.userService.getUsersRole(roleID).subscribe(
+  //     (data) => {
+  //       this.UserListSV = data;
+  //       console.log(this.UserListSV);
+  //     },
+  //     (error) => {
+  //       console.error('Error fetching users:', error);
+  //     }
+  //   );
+  // }
+  fetchUserByRole(roleID: number) {
+    if (this.isList) {
+      this.userService.getUsersRole(roleID).subscribe(
+        (data) => {
+          this.UserListSV = data;
+          console.log(this.UserListSV);
+        },
+        (error) => {
+          console.error('Error fetching users:', error);
+        }
+      );
+    } else {
+      this.userService.getUsersRole(roleID).subscribe(
+        (data) => {
+          this.UserListSV = data;
+          console.log(this.UserListSV);
+        },
+        (error) => {
+          console.error('Error fetching faculties:', error);
+        }
+      );
+    }
   }
   fetchUserByClass(classID: number) {
     this.userService.getUserByClass(classID).subscribe(
       (data) => {
-        this.UserList = data;
-        console.log(this.UserList);
+        this.UserListSV = data;
+        console.log(this.UserListSV);
       },
       (error) => {
         console.error('Error fetching users:', error);
@@ -114,7 +162,7 @@ export class UserComponent implements OnInit {
         .subscribe({
           next: (response) => {
             console.log('User deleted successfully:', response);
-            this.UserList = this.UserList.filter((u) => u.id !== user.id); // Update local list
+            this.UserListSV = this.UserListSV.filter((u) => u.id !== user.id); // Update local list
           },
           error: (error) => {
             console.error('Error deleting user:', error);
@@ -161,7 +209,7 @@ export class UserComponent implements OnInit {
     this.selectedClassID = parseInt(selectedValue, 10);
     this.fetchUserByClass(this.selectedClassID);
     console.log('Selected class ID:', this.selectedClassID);
-    console.log('Selected class ID:', this.UserList);
+    console.log('Selected class ID:', this.UserListSV);
     // Tìm lớp được chọn trong danh sách filteredClassList
     // this.selectedClass = this.filteredClassList.find(
     //   (c) => c['id'] === classId

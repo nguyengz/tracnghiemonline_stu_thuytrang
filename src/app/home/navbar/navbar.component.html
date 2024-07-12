@@ -38,13 +38,21 @@
               <a
                 class="nav-link px-0"
                 [routerLink]="['users']"
+                [queryParams]="{ list: 'sinhvien' }"
+                (click)="getRole(3)"
                 ariaCurrentWhenActive="page"
               >
                 <span class="d-none d-sm-inline">Quản lí Sinh viên</span>
               </a>
             </li>
             <li class="w-100 ms-4">
-              <a href="#" class="nav-link px-0">
+              <a
+                class="nav-link px-0"
+                [routerLink]="['users']"
+                [queryParams]="{ list: 'giangvien' }"
+                (click)="getRole(2)"
+                ariaCurrentWhenActive="page"
+              >
                 <span class="d-none d-sm-inline">Quản lí Giảng viên</span>
               </a>
             </li>

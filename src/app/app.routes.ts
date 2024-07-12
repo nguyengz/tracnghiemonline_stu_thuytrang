@@ -34,6 +34,11 @@ export const routes: Routes = [
         component: UserComponent,
       },
       {
+        path: 'users/giangvien',
+        canActivate: [authGuard], // Add authGuard for user access (if needed)
+        component: UserComponent,
+      },
+      {
         path: 'question',
         canActivate: [authGuard], // Add authGuard for user access (if needed)
         component: QuestionComponent,

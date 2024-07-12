@@ -19,4 +19,7 @@ export class NavbarComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('authUser') || 'null');
     return user?.roleName || '';
   }
+  getRole(roleID: number) {
+    localStorage.setItem('RID', JSON.stringify({ role: roleID }));
+  }
 }
