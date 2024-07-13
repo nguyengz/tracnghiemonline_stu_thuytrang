@@ -12,6 +12,10 @@ export class User {
     name: string;
     status: string;
   };
+  classes: {
+    id: number;
+    nameClass: string;
+  };
 
   constructor(data?: any) {
     this.id = data?.id || 0;
@@ -23,5 +27,6 @@ export class User {
     this.phone = data?.phone || '';
     this.status = data?.status || '';
     this.role = data?.role || { id: 0, name: '', status: '' };
+    this.classes = data?.classes || { id: 0, nameClass: '' };
   }
 }

@@ -85,7 +85,7 @@ export class ExamComponent implements OnInit {
     // console.log("Chao "+ this.isopenQuestions)
     // this.router.navigate(['admin', 'exam', 'list', subjectID]);
     // this.getExamBySubjects(subjectID);
-    this.router.navigate(['admin', 'exam', 'list'], {
+    this.router.navigate(['admin', 'exam', 'listtest'], {
       queryParams: { subjectID: subjectID, subjectName: subjectName },
     });
   }

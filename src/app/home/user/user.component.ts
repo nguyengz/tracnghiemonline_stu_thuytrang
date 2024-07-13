@@ -25,6 +25,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserComponent implements OnInit {
   [x: string]: any;
   UserListSV: User[] = [];
+  AllUserListSV: User[] = [];
   UserListGV: User[] = [];
   FacultiesList: Faculty[] = [];
   ClassList: Class[] = [];
@@ -32,7 +33,8 @@ export class UserComponent implements OnInit {
   isAddUserModalOpen = false;
   selectedUsersForDeletion: User[] = [];
   filteredClassList: any[] = [];
-  selectedClassID: any;
+  // selectedClassID: any;
+  selectedClassId!: number;
   roleName!: string;
   isList: boolean = false;
 
@@ -106,6 +108,7 @@ export class UserComponent implements OnInit {
       this.userService.getUsersRole(roleID).subscribe(
         (data) => {
           this.UserListSV = data;
+          this.AllUserListSV = data;
           console.log(this.UserListSV);
         },
         (error) => {
@@ -189,7 +192,27 @@ export class UserComponent implements OnInit {
       this.selectedUsersForDeletion.push(user);
     }
   }
+  onClassChange(event: any) {
+    this.selectedClassId = event.target.value;
+    const selectedfacultyId = event.target.value;
+    if (this.selectedClassId != 0 || selectedfacultyId != 0) {
+      this.filterUserList();
+    } else {
+      this.fetchUserByRole(3);
+    }
+  }
 
+  filterUserList() {
+    if (this.selectedClassId != null) {
+      this.UserListSV = this.UserListSV.filter(
+        (user) => user.classes.id == this.selectedClassId
+      );
+    } else {
+      // Hiển thị toàn bộ danh sách sinh viên
+      // this.fetchUserByRole(3);
+      this.UserListSV = this.AllUserListSV;
+    }
+  }
   onSubmit() {}
   openAddUserModal(): void {
     this.isAddUserModalOpen = true;
@@ -204,15 +227,15 @@ export class UserComponent implements OnInit {
       (item) => item.faculty.id === parseInt(selectedFacultyId)
     );
   }
-  getSinhVien(event: Event) {
-    const selectedValue = (event.target as HTMLSelectElement).value;
-    this.selectedClassID = parseInt(selectedValue, 10);
-    this.fetchUserByClass(this.selectedClassID);
-    console.log('Selected class ID:', this.selectedClassID);
-    console.log('Selected class ID:', this.UserListSV);
-    // Tìm lớp được chọn trong danh sách filteredClassList
-    // this.selectedClass = this.filteredClassList.find(
-    //   (c) => c['id'] === classId
-    // );
-  }
+  // getSinhVien(event: Event) {
+  //   const selectedValue = (event.target as HTMLSelectElement).value;
+  //   this.selectedClassID = parseInt(selectedValue, 10);
+  //   this.fetchUserByClass(this.selectedClassID);
+  //   console.log('Selected class ID:', this.selectedClassID);
+  //   console.log('Selected class ID:', this.UserListSV);
+  //   // Tìm lớp được chọn trong danh sách filteredClassList
+  //   // this.selectedClass = this.filteredClassList.find(
+  //   //   (c) => c['id'] === classId
+  //   // );
+  // }
 }

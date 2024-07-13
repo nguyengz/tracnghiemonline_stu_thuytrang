@@ -16,7 +16,7 @@
       id="facultySelect"
       (change)="onFacultySelected($event)"
     >
-      <option value="">Chọn khoa</option>
+      <option value="0">Chọn khoa</option>
       <option *ngFor="let faculty of FacultiesList" value="{{ faculty.id }}">
         {{ faculty.facultyName }}
       </option>
@@ -25,14 +25,15 @@
       class="form-select border-1 hover w-25"
       name="class"
       id="classSelect"
-      (change)="getSinhVien($event)"
+      (change)="onClassChange($event)"
     >
-      <option>Chọn lớp</option>
-      <option
+      <option value="0">Chọn lớp</option>
+      <!-- <option
         *ngFor="let class of filteredClassList"
         value="{{ class.id }}"
         (click)="getSinhVien(class.id)"
-      >
+      > -->
+      <option *ngFor="let class of filteredClassList" value="{{ class.id }}">
         {{ class.nameClass }}
       </option>
     </select>
